@@ -22,14 +22,13 @@ public class QuestionDAOImpl implements QuestionDAO {
         List<String[]> fullQuestions = csvParserFile.getFullQuestions();
         questionsList = new ArrayList<>();
         int index = 0;
-        for(String[] fullQuestion: fullQuestions){
-            Question question = new Question(index);
-            for (int i = 0; i < 3; i++) {
-                question.setQuestion(fullQuestion[0]);
-                question.setOption(fullQuestion[1]);
-                question.setAnswer(fullQuestion[2]);
-            }
-            questionsList.add(question);
+        for (String[] fullQuestion : fullQuestions) {
+            questionsList.add(Question.builder()
+                    .answer(fullQuestion[2])
+                    .question(fullQuestion[0])
+                    .id(index)
+                    .option(fullQuestion[1])
+                    .build());
             index++;
         }
         return questionsList;
